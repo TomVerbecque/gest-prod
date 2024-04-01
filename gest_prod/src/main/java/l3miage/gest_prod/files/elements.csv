@@ -1,0 +1,6 @@
+code,nom,quantite,uniteMesure
+E01,Acier,1000,kilogrammes
+E02,Plastique,500,kilogrammes
+E03,Vis,15000,unités
+E04,Cuivre,300,kilogrammes
+E05,Peinture,200,litres
