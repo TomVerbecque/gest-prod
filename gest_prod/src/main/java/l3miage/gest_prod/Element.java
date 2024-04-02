@@ -4,7 +4,7 @@ public class Element {
 	
     private String code;
     private String nom;
-    private double qteStock;
+    private int qteStock;
     private String unite;
 
     public Element(String p_code, String p_nom, int p_qteStock, String p_unite) {
@@ -22,10 +22,10 @@ public class Element {
         return this.nom;
     }
 
-    public double getQteStock() {
+    public int getQteStock() {
         return this.qteStock;
     }
-    public void setQteStock(double quantite) {
+    public void setQteStock(int quantite) {
         this.qteStock = quantite;
     }
 
@@ -43,9 +43,6 @@ public class Element {
 
     @Override
     public String toString() {
-        return "Element " + this.code + '\'' +
-                ", nom : " + this.nom + '\'' +
-                ", quantité en stock : " + this.qteStock +
-                ", unité de mesure : '" + this.unite;
+        return "Element " + this.code + ", nom : " + this.nom + ", quantité en stock : " + this.qteStock + ", unité de mesure : " + this.unite;
     }
 }
