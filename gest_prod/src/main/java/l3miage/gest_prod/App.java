@@ -51,10 +51,20 @@ public class App {
 public class App extends Application {
 	
 	@Override
-	public void start(Stage primaryStage) throws Exception {
-	    Parent root = FXMLLoader.load(getClass().getResource("Accueil.fxml"));
-	    primaryStage.setScene(new Scene(root));
-	    primaryStage.show();
+	public void start(Stage primaryStage) {	
+	    try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Accueil.fxml"));
+            Parent root = loader.load();
+
+            Scene scene = new Scene(root);
+
+            primaryStage.setTitle("Gestion Production");
+            primaryStage.setScene(scene);
+
+            primaryStage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 	}
 
 	public static void main(String[] args) {
