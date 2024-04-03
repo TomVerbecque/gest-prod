@@ -12,7 +12,7 @@ import javafx.stage.Stage;
 public class ControllerFXML {
 	 
 	    private void loadStockView(ActionEvent event) {
-	        loadView("Stock.fxml",event);
+	        loadView("Stock.fxml", event);
 	    }
 
 	    

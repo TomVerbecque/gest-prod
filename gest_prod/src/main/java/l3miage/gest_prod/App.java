@@ -51,9 +51,10 @@ public class App {
 public class App extends Application {
 	
 	@Override
-	public void start(Stage primaryStage) {	
+	public void start(Stage primaryStage) {
 	    try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("Accueil.fxml"));
+	    	
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Accueil.fxml"));
             Parent root = loader.load();
 
             Scene scene = new Scene(root);
@@ -68,6 +69,7 @@ public class App extends Application {
 	}
 
 	public static void main(String[] args) {
+		System.out.println("Répertoire de travail actuel : " + System.getProperty("user.dir"));
 		launch(args);
 	}
 }
