@@ -11,26 +11,65 @@ import javafx.stage.Stage;
 
 public class ControllerFXML {
 	 
-	    private void loadStockView(ActionEvent event) {
-	        loadView("Stock.fxml", event);
-	    }
+	public void loadStockView(ActionEvent event) {
+		try {
+	            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Stock.fxml"));
+	            Parent secondView = loader.load();
+
+	            Scene secondScene = new Scene(secondView);
+	            Stage newWindow = new Stage();
+	            newWindow.setTitle("Stock");
+	            newWindow.setScene(secondScene);
+
+	            newWindow.show();
+		} catch (Exception e) {
+	            e.printStackTrace();
+		}
+	}
 
 	    
-	    private void loadProductionView(ActionEvent event) {
-	        loadView("Production.fxml", event);
-	    }
+	public void loadChaineProductionView(ActionEvent event) {
+		try {
+	        FXMLLoader loader = new FXMLLoader(getClass().getResource("/ChaineProduction.fxml"));
+	        Parent secondView = loader.load();
 
-	    // Méthodes similaires pour les autres boutons
+	        Scene secondScene = new Scene(secondView);
+	        Stage newWindow = new Stage();
+	        newWindow.setTitle("Chaine de production");
+	        newWindow.setScene(secondScene);
 
-	    private void loadView(String fxmlFile, ActionEvent event) {
-	        try {
-	            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
-	            Parent view = loader.load();
-	            Scene scene = new Scene(view);
-	            Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-	            stage.setScene(scene);
-	        } catch (IOException e) {
-	            e.printStackTrace();
-	        }
-	    }
+	        newWindow.show();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void loadAchatVenteView(ActionEvent event) {
+		try {
+	        FXMLLoader loader = new FXMLLoader(getClass().getResource("/AchatVente.fxml"));
+	        Parent secondView = loader.load();
+
+	        Scene secondScene = new Scene(secondView);
+	        Stage newWindow = new Stage();
+	        newWindow.setTitle("Achats et ventes");
+	        newWindow.setScene(secondScene);
+
+	        newWindow.show();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+
+	public void loadView(String fxmlFile, ActionEvent event) {
+		try {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
+	        Parent view = loader.load();
+	        Scene scene = new Scene(view);
+	        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+	        stage.setScene(scene);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 }
