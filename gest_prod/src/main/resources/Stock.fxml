@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox fx:controller="l3miage.gest_prod.ControllerFXML" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="l3miage.gest_prod.ControllerFXML">
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <children>
@@ -27,10 +27,12 @@
                   <Button mnemonicParsing="false" onAction="#loadChaineProductionView" text="Production" />
                   <Button mnemonicParsing="false" onAction="#loadAchatVenteView" text="Achat/Vente" />
                   <Label alignment="CENTER" text="Gestion des Stocks" />
+                  <Button mnemonicParsing="false" text="Exporter" />
                </items>
             </ToolBar>
             <Button layoutX="540.0" layoutY="71.0" mnemonicParsing="false" text="+" />
             <TextField layoutX="36.0" layoutY="71.0" promptText="Rechercher" />
+            
       </children>
     </AnchorPane>
   </children>
