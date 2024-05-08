@@ -11,7 +11,12 @@ public class HeaderController {
     public void init(ControllerFXML mainController) {
         this.mainController = mainController;
     }
-
+    
+    @FXML
+    public void loadAccueilView() {
+        mainController.loadView("/Accueil.fxml");
+    }
+    
     @FXML
     public void loadStockView() {
         mainController.loadView("/Stock.fxml");
