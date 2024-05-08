@@ -21,14 +21,7 @@
                   <TableColumn prefWidth="137.0" text="Unité de mesure" />
               </columns>
             </TableView>
-            <ToolBar layoutX="36.0" layoutY="14.0" prefHeight="40.0" prefWidth="529.0">
-               <items>
-                  <Button mnemonicParsing="false" text="Stock" />
-                  <Button mnemonicParsing="false" onAction="#loadChaineProductionView" text="Production" />
-                  <Button mnemonicParsing="false" onAction="#loadAchatVenteView" text="Achat/Vente" />
-                  <Label alignment="CENTER" text="Gestion des Stocks" />
-               </items>
-            </ToolBar>
+            
             <Button layoutX="540.0" layoutY="71.0" mnemonicParsing="false" text="+" />
             <TextField layoutX="36.0" layoutY="71.0" promptText="Rechercher" />
       </children>

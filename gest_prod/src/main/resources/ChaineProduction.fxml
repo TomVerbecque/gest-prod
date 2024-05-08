@@ -22,14 +22,7 @@
                   <TableColumn prefWidth="95.0" text="Sortie" />
               </columns>
             </TableView>
-            <ToolBar layoutX="36.0" layoutY="14.0" prefHeight="40.0" prefWidth="529.0">
-               <items>
-                  <Button fx:id="btnStock" onAction="#loadStockView" mnemonicParsing="false" text="Stock" />
-                  <Button mnemonicParsing="false" text="Production" />
-                  <Button mnemonicParsing="false" onAction="#loadAchatVenteView" text="Achat/Vente" />
-                  <Label alignment="CENTER" text="Chaîne de Production" />
-               </items>
-            </ToolBar>
+            
             <Button layoutX="540.0" layoutY="71.0" mnemonicParsing="false" text="+" />
             <TextField layoutX="36.0" layoutY="71.0" promptText="Rechercher" />
       </children>

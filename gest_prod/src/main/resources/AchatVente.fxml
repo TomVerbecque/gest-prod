@@ -87,14 +87,7 @@
             <TextField layoutX="270.0" layoutY="215.0" />
             <TextField layoutX="270.0" layoutY="242.0" />
             <Button layoutX="441.0" layoutY="242.0" mnemonicParsing="false" text="Ajouter" />
-            <ToolBar layoutX="56.0" layoutY="14.0" prefHeight="40.0" prefWidth="529.0">
-               <items>
-                  <Button fx:id="btnStock" onAction="#loadStockView" mnemonicParsing="false" text="Stock" />
-                  <Button mnemonicParsing="false" onAction="#loadChaineProductionView" text="Production" />
-                  <Button mnemonicParsing="false" text="Achat/Vente" />
-                  <Label alignment="CENTER" text="Achat/Vente" />
-               </items>
-            </ToolBar>
+            
       </children>
     </AnchorPane>
   </children>

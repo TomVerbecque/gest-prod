@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.layout.HBox?>
+
+<HBox xmlns:fx="http://javafx.com/fxml/1" fx:controller="l3miage.gest_prod.HeaderController">
+    <ToolBar prefHeight="40.0" prefWidth="600.0">
+        <items>
+            <Button fx:id="btnStock" onAction="#loadStockView" text="Stock" />
+            <Button fx:id="btnProduction" onAction="#loadChaineProductionView" text="Production" />
+            <Button fx:id="btnAchatVente" onAction="#loadAchatVenteView" text="Achat/Vente" />
+            <Label alignment="CENTER" text="Tableau de bord" />
+        </items>
+    </ToolBar>
+</HBox>

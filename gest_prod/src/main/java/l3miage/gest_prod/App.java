@@ -54,7 +54,7 @@ public class App extends Application {
 	public void start(Stage primaryStage) {
 	    try {
 	    	
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Accueil.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Main.fxml"));
             Parent root = loader.load();
 
             Scene scene = new Scene(root);

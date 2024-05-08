@@ -1,75 +1,45 @@
 package l3miage.gest_prod;
 
+
 import java.io.IOException;
 
-import javafx.event.ActionEvent;
+import javafx.application.Platform;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 
 public class ControllerFXML {
-	 
-	public void loadStockView(ActionEvent event) {
-		try {
-	            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Stock.fxml"));
-	            Parent secondView = loader.load();
 
-	            Scene secondScene = new Scene(secondView);
-	            Stage newWindow = new Stage();
-	            newWindow.setTitle("Stock");
-	            newWindow.setScene(secondScene);
+    @FXML
+    private HeaderController headerController; // Assurez-vous que c'est correctement annoté pour FXML
 
-	            newWindow.show();
-		} catch (Exception e) {
-	            e.printStackTrace();
-		}
-	}
+    @FXML
+    private Pane mainContent;
 
-	    
-	public void loadChaineProductionView(ActionEvent event) {
-		try {
-	        FXMLLoader loader = new FXMLLoader(getClass().getResource("/ChaineProduction.fxml"));
-	        Parent secondView = loader.load();
+    @FXML
+    public void initialize() {
+        Platform.runLater(() -> {
+            if (headerController != null) {
+                headerController.init(this);
+                loadView("/Accueil.fxml");
+            } else {
+                System.out.println("HeaderController is not yet initialized.");
+            }
+        });
+    }
 
-	        Scene secondScene = new Scene(secondView);
-	        Stage newWindow = new Stage();
-	        newWindow.setTitle("Chaine de production");
-	        newWindow.setScene(secondScene);
+    public void loadView(String fxml) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
+            Node view = loader.load();
+            mainContent.getChildren().setAll(view);
+        } catch (IOException e) {
+            e.printStackTrace();  // Imprimez la trace de la pile pour voir ce qui ne va pas
+        }
+    }
 
-	        newWindow.show();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	
-	public void loadAchatVenteView(ActionEvent event) {
-		try {
-	        FXMLLoader loader = new FXMLLoader(getClass().getResource("/AchatVente.fxml"));
-	        Parent secondView = loader.load();
-
-	        Scene secondScene = new Scene(secondView);
-	        Stage newWindow = new Stage();
-	        newWindow.setTitle("Achats et ventes");
-	        newWindow.setScene(secondScene);
-
-	        newWindow.show();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-
-	public void loadView(String fxmlFile, ActionEvent event) {
-		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
-	        Parent view = loader.load();
-	        Scene scene = new Scene(view);
-	        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-	        stage.setScene(scene);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
 }
+
+
