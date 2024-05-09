@@ -8,18 +8,27 @@
 <?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
 
 <VBox fx:controller="l3miage.gest_prod.StockController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <children>
             <TableView layoutX="36.0" layoutY="96.0" prefHeight="280.0" prefWidth="529.0" fx:id="tableViewStock" editable="true">
-              <columns>
-                <TableColumn prefWidth="144.0" text="Code" fx:id="columnCode" />
-                <TableColumn prefWidth="135.0" text="Nom" fx:id="columnName"  />
-                  <TableColumn prefWidth="112.0" text="Quantité" fx:id="columnQuantity"  />
-                  <TableColumn prefWidth="137.0" text="Unité de mesure" fx:id="columnUnit" />
-              </columns>
+               <columns>
+        <TableColumn text="Code">
+            <cellValueFactory><PropertyValueFactory property="code" /></cellValueFactory>
+        </TableColumn>
+        <TableColumn text="Nom">
+            <cellValueFactory><PropertyValueFactory property="name" /></cellValueFactory>
+        </TableColumn>
+        <TableColumn text="Quantité">
+            <cellValueFactory><PropertyValueFactory property="quantity" /></cellValueFactory>
+        </TableColumn>
+        <TableColumn text="Unité">
+            <cellValueFactory><PropertyValueFactory property="unit" /></cellValueFactory>
+        </TableColumn>
+    </columns>
             </TableView>
             
             <Button layoutX="540.0" layoutY="71.0" mnemonicParsing="false" text="+" />
