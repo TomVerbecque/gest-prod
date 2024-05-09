@@ -1,44 +1,83 @@
 package l3miage.gest_prod;
 
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
 import java.util.Map;
 
 public class ChaineProduction {
+    private SimpleStringProperty code;
+    private SimpleStringProperty name;
+    private SimpleIntegerProperty activationLevel;
+    private SimpleStringProperty inputElements;
+    private SimpleStringProperty outputElements;
 
-	private String code;
-	private String nom;
-	private Map<Element, Integer> elementsEntres;
-	private Map<Element, Integer> elementsSortis;
-	private int niveauProd;
-	
-	public ChaineProduction(String p_code, String p_nom, Map<Element, Integer> p_elementsEntres, Map<Element, Integer> p_elementsSortis) {
-		this.code = p_code;
-		this.nom = p_nom;
-		this.elementsEntres = p_elementsEntres;
-		this.elementsSortis = p_elementsSortis;
-		this.niveauProd = 0;
+    // Constructeur
+    public ChaineProduction(String code, String name,int activationLevel, Map<Element, Integer> entrees, Map<Element, Integer> sorties) {
+        this.code = new SimpleStringProperty(code);
+        this.name = new SimpleStringProperty(name);
+        this.activationLevel = new SimpleIntegerProperty(activationLevel);
+        this.inputElements = new SimpleStringProperty(formatElements(entrees));
+        this.outputElements = new SimpleStringProperty(formatElements(sorties));
+    }
+
+    // Getters pour JavaFX TableView
+    public String getCode() {
+        return code.get();
+    }
+
+    public String getName() {
+        return name.get();
+    }
+
+    // Pour obtenir les noms et quantités formatés des entrées
+   
+
+    // Méthode utilitaire pour formater les éléments de la Map
+    private String formatElements(Map<Element, Integer> elements) {
+        StringBuilder builder = new StringBuilder();
+        if (elements != null) {
+            elements.forEach((element, quantity) -> {
+                if (builder.length() > 0) {
+                    builder.append(", ");
+                }
+                builder.append(element.getName() + " x " + quantity);  // Assumant que Element a une méthode getName()
+            });
+        }
+        return builder.toString();
+    }
+
+    // Setters au cas où vous en auriez besoin pour la logique de l'application
+    public void setCode(String code) {
+        this.code.set(code);
+    }
+
+    public void setName(String name) {
+        this.name.set(name);
+    }
+
+	public int getActivationLevel() {
+		return activationLevel.get();
 	}
-	
-	public String getCode() {
-        return this.code;
-    }
 
-    public String getNom() {
-        return this.nom;
-    }
+	public void setActivationLevel(int activationLevel) {
+		this.activationLevel.set(activationLevel);
+	}
 
-    public Map<Element, Integer> getEntrees() {
-        return this.elementsEntres;
-    }
+	public String getInputElements() {
+		return inputElements.get();
+	}
 
-    public Map<Element, Integer> getSorties() {
-        return this.elementsSortis;
-    }
+	public void setInputElements(String inputElements) {
+		this.inputElements.set(inputElements);
+	}
 
-    public int getNiveauActivation() {
-        return this.niveauProd;
-    }
-    
-    public String toString() {
-        return "ChaineDeProduction " + this.code + ", nom : " + this.nom + ", entrees : " + this.elementsEntres + ", sorties : " + this.elementsSortis + ", niveauActivation : " + this.niveauProd;
-    }
+	public String getOutputElements() {
+		return outputElements.get();
+	}
+
+	public void setOutputElements(String outputElements) {
+		this.outputElements.set(outputElements);
+	}
+
+  
 }
