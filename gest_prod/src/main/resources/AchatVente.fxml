@@ -33,60 +33,35 @@
 -->
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
-
-<VBox fx:controller="l3miage.gest_prod.ControllerFXML" prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="l3miage.gest_prod.AchatVenteController">
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <children>
-        <Label alignment="CENTER" layoutX="137.0" layoutY="162.0" style="&#10;" text="N° Transaction" textAlignment="CENTER" textFill="#9f9f9f" wrapText="false">
-          <font>
-            <Font size="18.0" />
-          </font>
-        </Label>
-            <TableView layoutX="56.0" layoutY="64.0" prefHeight="91.0" prefWidth="529.0">
-              <columns>
-                <TableColumn prefWidth="119.0" text="N° Opération" />
-                <TableColumn prefWidth="94.0" text="Libellé" />
-                  <TableColumn prefWidth="75.0" text="Catégories" />
-                  <TableColumn prefWidth="75.0" text="Date" />
-              </columns>
-            </TableView>
-            <TableView layoutX="56.0" layoutY="281.0" prefHeight="91.0" prefWidth="529.0">
+            
+            <TableView fx:id="tableViewAchatVente" editable="true" layoutX="36.0" layoutY="96.0" prefHeight="280.0" prefWidth="529.0">
                <columns>
-                  <TableColumn prefWidth="119.0" text="N° Opération" />
-                  <TableColumn prefWidth="94.0" text="Libellé" />
-                  <TableColumn prefWidth="75.0" text="Catégories" />
-                  <TableColumn prefWidth="75.0" text="Date" />
-               </columns>
+        <TableColumn prefWidth="132.25" text="Élément" >
+            <cellValueFactory><PropertyValueFactory property="element" /></cellValueFactory>
+        </TableColumn>
+        <TableColumn prefWidth="132.25" text="Prix Achat">
+            <cellValueFactory><PropertyValueFactory property="achat" /></cellValueFactory>
+        </TableColumn>
+        <TableColumn prefWidth="132.25" text="Prix Vente">
+            <cellValueFactory><PropertyValueFactory property="vente" /></cellValueFactory>
+        </TableColumn>
+        <TableColumn prefWidth="132.25" text="Nb commandé">
+            <cellValueFactory><PropertyValueFactory property="quantite" /></cellValueFactory>
+        </TableColumn>
+    </columns>
             </TableView>
-            <Label alignment="CENTER" layoutX="137.0" layoutY="187.0" style="&#10;" text="Libellé" textAlignment="CENTER" textFill="#9f9f9f" wrapText="false">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Label>
-            <Label alignment="CENTER" layoutX="137.0" layoutY="214.0" style="&#10;" text="Montant" textAlignment="CENTER" textFill="#9f9f9f" wrapText="false">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Label>
-            <Label alignment="CENTER" layoutX="137.0" layoutY="241.0" style="&#10;" text="Date" textAlignment="CENTER" textFill="#9f9f9f" wrapText="false">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Label>
-            <TextField layoutX="270.0" layoutY="161.0" />
-            <TextField layoutX="270.0" layoutY="188.0" />
-            <TextField layoutX="270.0" layoutY="215.0" />
-            <TextField layoutX="270.0" layoutY="242.0" />
-            <Button layoutX="441.0" layoutY="242.0" mnemonicParsing="false" text="Ajouter" />
+            
+           
             
       </children>
     </AnchorPane>

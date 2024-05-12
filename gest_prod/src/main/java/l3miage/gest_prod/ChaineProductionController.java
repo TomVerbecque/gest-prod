@@ -29,9 +29,7 @@ public class ChaineProductionController {
 		            
 		        }
 		        chaines = GestionCSV.readChaineCSV("src/main/java/l3miage/gest_prod/files/chaines.csv", mapElements);
-		        System.out.println(chaines);
 			    ObservableList<ChaineProduction> observableList = FXCollections.observableList(chaines);
-			    System.out.println(observableList);
 			    tableViewChaineProduction.setItems(observableList);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

@@ -16,8 +16,8 @@ public class ChaineProduction {
         this.code = new SimpleStringProperty(code);
         this.name = new SimpleStringProperty(name);
         this.activationLevel = new SimpleIntegerProperty(activationLevel);
-        this.inputElements = new SimpleStringProperty(formatElements(entrees));
-        this.outputElements = new SimpleStringProperty(formatElements(sorties));
+        this.inputElements = new SimpleStringProperty(GestionCSV.formatElements(entrees));
+        this.outputElements = new SimpleStringProperty(GestionCSV.formatElements(sorties));
     }
 
     // Getters pour JavaFX TableView
@@ -33,18 +33,7 @@ public class ChaineProduction {
    
 
     // Méthode utilitaire pour formater les éléments de la Map
-    private String formatElements(Map<Element, Integer> elements) {
-        StringBuilder builder = new StringBuilder();
-        if (elements != null) {
-            elements.forEach((element, quantity) -> {
-                if (builder.length() > 0) {
-                    builder.append(", ");
-                }
-                builder.append(element.getName() + " x " + quantity);  // Assumant que Element a une méthode getName()
-            });
-        }
-        return builder.toString();
-    }
+    
 
     // Setters au cas où vous en auriez besoin pour la logique de l'application
     public void setCode(String code) {
