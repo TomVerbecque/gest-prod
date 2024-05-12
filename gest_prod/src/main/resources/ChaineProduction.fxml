@@ -5,6 +5,7 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.control.cell.TextFieldTableCell?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
@@ -12,7 +13,7 @@
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <children>
-            <TableView fx:id="tableViewChaineProduction" layoutY="37.0" prefHeight="363.0" prefWidth="600.0">
+            <TableView fx:id="tableViewChaineProduction" layoutY="37.0" prefHeight="363.0" prefWidth="600.0" editable="true">
 			    <columns>
 			        <TableColumn prefWidth="51.0" text="Code">
 			            <cellValueFactory><PropertyValueFactory property="code" /></cellValueFactory>
@@ -20,9 +21,14 @@
 			        <TableColumn prefWidth="122.0" text="Nom">
 			            <cellValueFactory><PropertyValueFactory property="name" /></cellValueFactory>
 			        </TableColumn>
-			        <TableColumn prefWidth="131.0" text="Niveau d'Activation">
-			            <cellValueFactory><PropertyValueFactory property="activationLevel" /></cellValueFactory>
-			        </TableColumn>
+			        <TableColumn fx:id="activationLevelColumn" text="Niveau d'Activation">
+					    <cellValueFactory>
+					        <PropertyValueFactory property="activationLevel" />
+					    </cellValueFactory>
+					    <cellFactory>
+					        <TextFieldTableCell fx:factory="forTableColumn" />
+					    </cellFactory>
+					</TableColumn>
 			        <TableColumn prefWidth="155.0" text="Éléments en Entrée">
 			            <cellValueFactory><PropertyValueFactory property="inputElements" /></cellValueFactory>
 			        </TableColumn>

@@ -10,14 +10,24 @@ import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+
+import javafx.scene.control.cell.TextFieldTableCell;
 
 public class ChaineProductionController {
+	@FXML public TableView<ChaineProduction> tableViewChaineProduction;
 	@FXML
-	private TableView<ChaineProduction> tableViewChaineProduction;
+	private TableColumn<ChaineProduction, String> activationLevelColumn;
+	
+	private void handleChange() {
+	    System.out.println("test"); // Affiche "test" chaque fois qu'un changement est effectué
+	}
 	
 	@FXML
 	public void initialize() {
+		
 		Platform.runLater(() -> {
 		List<ChaineProduction> chaines= new ArrayList<>();
 		List<Element> listElements;
@@ -35,6 +45,16 @@ public class ChaineProductionController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		activationLevelColumn.setCellValueFactory(new PropertyValueFactory<>("activationLevel"));
+	    activationLevelColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+	    activationLevelColumn.setOnEditCommit(event -> {
+	        ChaineProduction chaine = event.getRowValue();
+	        chaine.setActivationLevel(event.getNewValue());
+	        System.out.println(chaine);
+	       
+	        handleChange();
+		});
+
        
 	    
 		});

@@ -41,6 +41,11 @@
       <version>5.7.1</version>
       <scope>test</scope>
     </dependency>
+    <dependency>
+    	<groupId>com.projet</groupId>
+    	<artifactId>gest-prod</artifactId>
+    	<version>0.0.1-SNAPSHOT</version>
+    </dependency>
   </dependencies>
 
   <build>

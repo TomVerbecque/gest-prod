@@ -1,12 +1,16 @@
 package l3miage.gest_prod;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javafx.scene.control.TableView;
 
 public class GestionCSV {
 
@@ -34,7 +38,7 @@ public class GestionCSV {
                 
                 Map<Element, Integer> entrees = parseElementQuantite(data[3], elementsMap);
                 Map<Element, Integer> sorties = parseElementQuantite(data[4], elementsMap);
-                ChaineProduction chaine = new ChaineProduction(data[0], data[1],Integer.parseInt(data[2]), entrees, sorties);
+                ChaineProduction chaine = new ChaineProduction(data[0], data[1],data[2], entrees, sorties);
                 chaines.add(chaine);
             }
         }
@@ -77,6 +81,19 @@ public class GestionCSV {
             elements.put(element, quantite);
         }
         return elements;
+    }
+    
+    public static void saveChaineCSV(List<ChaineProduction> chaines, String cheminFichier) throws IOException {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(cheminFichier))) {
+            writer.write("Code,Nom,Niveau d'Activation,Entrees,Sorties\n");
+            for (ChaineProduction chaine : chaines) {
+                writer.write(chaine.getCode() + "," +
+                             chaine.getName() + "," +
+                             chaine.getActivationLevel() + "," +
+                             chaine.getInputElements() + "," +
+                             chaine.getOutputElements() + "\n");
+            }
+        }
     }
     
     

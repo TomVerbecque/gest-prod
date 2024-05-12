@@ -7,15 +7,15 @@ import java.util.Map;
 public class ChaineProduction {
     private SimpleStringProperty code;
     private SimpleStringProperty name;
-    private SimpleIntegerProperty activationLevel;
+    private SimpleStringProperty activationLevel;
     private SimpleStringProperty inputElements;
     private SimpleStringProperty outputElements;
 
     // Constructeur
-    public ChaineProduction(String code, String name,int activationLevel, Map<Element, Integer> entrees, Map<Element, Integer> sorties) {
+    public ChaineProduction(String code, String name,String activationLevel, Map<Element, Integer> entrees, Map<Element, Integer> sorties) {
         this.code = new SimpleStringProperty(code);
         this.name = new SimpleStringProperty(name);
-        this.activationLevel = new SimpleIntegerProperty(activationLevel);
+        this.activationLevel = new SimpleStringProperty(activationLevel);
         this.inputElements = new SimpleStringProperty(GestionCSV.formatElements(entrees));
         this.outputElements = new SimpleStringProperty(GestionCSV.formatElements(sorties));
     }
@@ -44,11 +44,11 @@ public class ChaineProduction {
         this.name.set(name);
     }
 
-	public int getActivationLevel() {
+	public String getActivationLevel() {
 		return activationLevel.get();
 	}
 
-	public void setActivationLevel(int activationLevel) {
+	public void setActivationLevel(String activationLevel) {
 		this.activationLevel.set(activationLevel);
 	}
 
