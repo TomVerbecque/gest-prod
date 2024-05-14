@@ -21,8 +21,14 @@ public class ChaineProductionController {
 	@FXML
 	private TableColumn<ChaineProduction, String> activationLevelColumn;
 	
-	private void handleChange() {
-	    System.out.println("test"); // Affiche "test" chaque fois qu'un changement est effectué
+	private void saveChanges() {
+	    try {
+	        GestionCSV.saveChaineCSV(tableViewChaineProduction.getItems(),"src/main/java/l3miage/gest_prod/files/chaines.csv");
+	        System.out.println("Modifications sauvegardées.");
+	    } catch (IOException e) {
+	        e.printStackTrace(); // Affiche l'erreur en cas de problème
+	        System.out.println("Erreur lors de la sauvegarde des modifications.");
+	    }
 	}
 	
 	@FXML
@@ -50,10 +56,8 @@ public class ChaineProductionController {
 	    activationLevelColumn.setOnEditCommit(event -> {
 	        ChaineProduction chaine = event.getRowValue();
 	        chaine.setActivationLevel(event.getNewValue());
-	        System.out.println(chaine);
-	       
-	        handleChange();
-		});
+	        saveChanges(); // Modifier cette méthode pour inclure la sauvegarde dans le fichier CSV
+	    });
 
        
 	    
