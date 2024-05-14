@@ -10,11 +10,27 @@ import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 
 public class AchatVenteController {
 	@FXML
 	private TableView<AchatVente> tableViewAchatVente;
+	
+	@FXML
+	private TableColumn<AchatVente, String> quantiteColumn;
+	
+	private void saveQuantiteChanges(Map<String, Element> mapElements) {
+	    try {
+	        GestionCSV.savePrixCSV(tableViewAchatVente.getItems(),"src/main/java/l3miage/gest_prod/files/prix.csv",  mapElements);
+	        System.out.println("Modifications sauvegardées.");
+	    } catch (IOException e) {
+	        e.printStackTrace(); // Affiche l'erreur en cas de problème
+	        System.out.println("Erreur lors de la sauvegarde des modifications.");
+	    }
+	}
 	
 	@FXML
 	public void initialize() {
@@ -29,15 +45,25 @@ public class AchatVenteController {
 		            
 		        }
 		        achatvente = GestionCSV.readPrixCSV("src/main/java/l3miage/gest_prod/files/prix.csv", mapElements);
-		        System.out.println(achatvente);
 			    ObservableList<AchatVente> observableList = FXCollections.observableList(achatvente);
 			    tableViewAchatVente.setItems(observableList);
-			    System.out.println(observableList);
+			    quantiteColumn.setCellValueFactory(new PropertyValueFactory<>("quantite"));
+			    // Assurez-vous que le TextFieldTableCell utilise un StringConverter approprié
+			    quantiteColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+			    quantiteColumn.setOnEditCommit(event -> {
+			        AchatVente achatVente = event.getRowValue();
+			        if (!"NA".equals(achatVente.getAchat())) {
+			            achatVente.setQuantite(event.getNewValue());
+			            saveQuantiteChanges(mapElements); // Méthode pour enregistrer les changements
+			        }
+			    });
+	       
+			    
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-       
+		 	
 	    
 		});
 }}

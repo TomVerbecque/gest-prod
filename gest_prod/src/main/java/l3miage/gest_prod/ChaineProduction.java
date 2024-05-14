@@ -12,7 +12,7 @@ public class ChaineProduction {
     private SimpleStringProperty outputElements;
 
     // Constructeur
-    public ChaineProduction(String code, String name,String activationLevel, Map<Element, Integer> entrees, Map<Element, Integer> sorties) {
+    public ChaineProduction(String code, String name,String activationLevel, Map<Element, String> entrees, Map<Element, String> sorties) {
         this.code = new SimpleStringProperty(code);
         this.name = new SimpleStringProperty(name);
         this.activationLevel = new SimpleStringProperty(activationLevel);

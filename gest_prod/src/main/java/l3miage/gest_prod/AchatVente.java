@@ -9,13 +9,13 @@ public class AchatVente {
     private SimpleStringProperty element;
     private SimpleStringProperty achat;
     private SimpleStringProperty vente;
-    private SimpleIntegerProperty quantite;
+    private SimpleStringProperty quantite;
 
-    public AchatVente(String entrees, String p_prixAchat, String p_prixVente, int p_quantite) {
+    public AchatVente(String entrees, String p_prixAchat, String p_prixVente, String p_quantite) {
         this.element = new SimpleStringProperty(entrees);
         this.achat = new SimpleStringProperty(p_prixAchat);
         this.vente = new SimpleStringProperty(p_prixVente);
-        this.quantite = new SimpleIntegerProperty(p_quantite);
+        this.quantite = new SimpleStringProperty(p_quantite);
     }
 
     
@@ -51,13 +51,13 @@ public class AchatVente {
 	}
 
 
-	public int getQuantite() {
+	public String getQuantite() {
 		return this.quantite.get();
 	}
 	
 
 
-	public void setQuantite(int quantite) {
+	public void setQuantite(String quantite) {
 		this.quantite.set(quantite);
 	}
 	

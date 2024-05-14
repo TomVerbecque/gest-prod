@@ -1,6 +1,6 @@
-code,prixAchat,prixVente,qteCommandee
-E01,500,450,0
+Code,Prix Achat,Prix Vente,Quantité Commandée
+E01,500,450,6
 E02,NA,100,0
-E03,254,87,0
-E04,5,4,0
-E05,4,2,0
+E03,254,87,7
+E04,5,4,900
+E05,4,2,8
