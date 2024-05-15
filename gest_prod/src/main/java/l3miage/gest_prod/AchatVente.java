@@ -6,17 +6,28 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 public class AchatVente {
-    private SimpleStringProperty element;
+	private String code;
+	private SimpleStringProperty element;
     private SimpleStringProperty achat;
     private SimpleStringProperty vente;
     private SimpleStringProperty quantite;
 
-    public AchatVente(String entrees, String p_prixAchat, String p_prixVente, String p_quantite) {
+    public AchatVente(String code,String entrees, String p_prixAchat, String p_prixVente, String p_quantite) {
+    	this.code=code;
         this.element = new SimpleStringProperty(entrees);
         this.achat = new SimpleStringProperty(p_prixAchat);
         this.vente = new SimpleStringProperty(p_prixVente);
         this.quantite = new SimpleStringProperty(p_quantite);
     }
+    public String getCode() {
+		return code;
+	}
+
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
 
     
 	public String getElement() {

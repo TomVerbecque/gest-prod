@@ -1,4 +1,4 @@
 Code,Nom,Niveau d'Activation,Entrees,Sorties
-C01,Chaîne de Montage A,8,E01:100|E03:50,E02:200
-C02,Chaîne de Montage B,10,E02:300,E03:150|E04:100
+C01,Chaîne de Montage A,5,E01:100|E03:50,E02:200
+C02,Chaîne de Montage B,0,E02:300,E03:150|E04:100
 C03,Chaîne d'Assemblage C,0,E04:200|E05:100,E01:400

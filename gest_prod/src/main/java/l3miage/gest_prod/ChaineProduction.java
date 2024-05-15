@@ -11,13 +11,18 @@ public class ChaineProduction {
     private SimpleStringProperty inputElements;
     private SimpleStringProperty outputElements;
 
+	private String sortieString;
+	private String entreeString;
+
     // Constructeur
-    public ChaineProduction(String code, String name,String activationLevel, Map<Element, String> entrees, Map<Element, String> sorties) {
+    public ChaineProduction(String code, String name,String activationLevel, Map<Element, String> entrees, Map<Element, String> sorties, String entreeString, String sortieString) {
         this.code = new SimpleStringProperty(code);
         this.name = new SimpleStringProperty(name);
         this.activationLevel = new SimpleStringProperty(activationLevel);
         this.inputElements = new SimpleStringProperty(GestionCSV.formatElements(entrees));
         this.outputElements = new SimpleStringProperty(GestionCSV.formatElements(sorties));
+        this.sortieString= sortieString;
+        this.entreeString = entreeString;
     }
 
     // Getters pour JavaFX TableView
@@ -68,5 +73,20 @@ public class ChaineProduction {
 		this.outputElements.set(outputElements);
 	}
 
-  
+    public String getSortieString() {
+		return sortieString;
+	}
+
+	public void setSortieString(String sortieString) {
+		this.sortieString = sortieString;
+	}
+
+	public String getEntreeString() {
+		return entreeString;
+	}
+
+	public void setEntreeString(String entreeString) {
+		this.entreeString = entreeString;
+	}
+
 }

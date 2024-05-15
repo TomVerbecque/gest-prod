@@ -2,6 +2,7 @@ package l3miage.gest_prod;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -39,9 +40,30 @@ public class GestionCSV {
                 
                 Map<Element, String> entrees = parseElementQuantite(data[3], elementsMap);
                 Map<Element, String> sorties = parseElementQuantite(data[4], elementsMap);
-                ChaineProduction chaine = new ChaineProduction(data[0], data[1],data[2], entrees, sorties);
+                ChaineProduction chaine = new ChaineProduction(data[0], data[1],data[2], entrees, sorties,data[3],data[4]);
                 chaines.add(chaine);
             }
+        }
+        return chaines;
+    }
+    
+    
+    
+    
+    public static List<ChaineProduction> readChaineActiveCSV(String cheminFichier, Map<String, Element> elementsMap) throws IOException {
+        List<ChaineProduction> chaines = new ArrayList<>();
+        try (BufferedReader reader = new BufferedReader(new FileReader(cheminFichier))) {
+            reader.readLine();  // Ignorer l'en-tête
+            String ligne;
+            while ((ligne = reader.readLine()) != null) {
+                String[] data = ligne.split(",");
+                if(Integer.parseInt(data[2])>0) {
+	                Map<Element, String> entrees = parseElementQuantite(data[3], elementsMap);
+	                Map<Element, String> sorties = parseElementQuantite(data[4], elementsMap);
+	                ChaineProduction chaine = new ChaineProduction(data[0], data[1],data[2], entrees, sorties,data[3],data[4]);
+	                chaines.add(chaine);
+            }
+                }
         }
         return chaines;
     }
@@ -70,12 +92,43 @@ public class GestionCSV {
                 String[] data = ligne.split(",");
                
                 String nomElement = elementsMap.get(data[0]).getName();
-                AchatVente achatvente = new AchatVente(nomElement,data[1], data[2],(data[3]));
+                AchatVente achatvente = new AchatVente(data[0],nomElement,data[1], data[2],(data[3]));
                 achatventes.add(achatvente);
             }
         }
         return achatventes;
     }
+    
+    public static List<AchatVente> ajoutCommandeStockCSV(String cheminFichier, Map<String, Element> elementsMap) throws IOException {
+        List<AchatVente> achatventes = new ArrayList<>();
+        try (BufferedReader reader = new BufferedReader(new FileReader(cheminFichier))) {
+            reader.readLine();  // Ignorer l'en-tête
+            String ligne;
+            while ((ligne = reader.readLine()) != null) {
+                String[] data = ligne.split(",");
+               
+                String nomElement = elementsMap.get(data[0]).getName();
+                AchatVente achatvente = new AchatVente(data[0],nomElement,data[1], data[2],(data[3]));
+                achatventes.add(achatvente);
+            }
+        }
+        return achatventes;
+    }
+    
+    public static Map<String,Integer> codePrixVente (String cheminFichier) throws FileNotFoundException, IOException{
+    	 Map<String, Integer> codePrix = new HashMap<>();
+    	 try (BufferedReader reader = new BufferedReader(new FileReader(cheminFichier))) {
+             reader.readLine();  // Ignorer l'en-tête
+             String ligne;
+             while ((ligne = reader.readLine()) != null) {
+                 String[] data = ligne.split(",");
+                
+                 codePrix.put(data[0], Integer.parseInt(data[2]));
+             }
+         }
+    	 return codePrix;
+    }
+    
     public static String formatElements(Map<Element, String> elements) {
         StringBuilder builder = new StringBuilder();
         if (elements != null) {
@@ -88,6 +141,8 @@ public class GestionCSV {
         }
         return builder.toString();
     }
+    
+    
     private static Map<Element, String> parseElementQuantite(String data, Map<String, Element> elementsMap) {
         Map<Element, String> elements = new HashMap<>();
         for (String part : data.split("\\|")) {
@@ -98,6 +153,19 @@ public class GestionCSV {
         }
         return elements;
     }
+    
+    public static Map<String, Integer> parseElementQuantiteChaine(String data, Map<String, Element> elementsMap) {
+        Map<String, Integer> elements = new HashMap<>();
+        for (String part : data.split("\\|")) {
+            String[] item = part.split(":");
+            Element element = elementsMap.get(item[0]);
+            int quantite = Integer.parseInt((item[1]));
+            elements.put(element.getCode(), quantite);
+        }
+        return elements;
+    }
+    
+    
     
     public static void saveChaineCSV(List<ChaineProduction> chaines, String cheminFichier) throws IOException {
     	List<String[]> entreeSortie = readChaineEntreSortieCSV(cheminFichier);
