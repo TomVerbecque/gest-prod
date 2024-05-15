@@ -2,6 +2,10 @@ package l3miage.gest_prod;
 
 
 
+import java.io.IOException;
+
+import com.itextpdf.text.DocumentException;
+
 import javafx.fxml.FXML;
 
 public class HeaderController {
@@ -30,5 +34,10 @@ public class HeaderController {
     @FXML
     public void loadAchatVenteView() {
         mainController.loadView("/AchatVente.fxml");
+    }
+    
+    @FXML
+    public void Export() throws DocumentException, IOException {
+        ExportPDF.exportDataToPDF();
     }
 }

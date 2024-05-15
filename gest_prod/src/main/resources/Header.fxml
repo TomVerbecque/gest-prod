@@ -12,6 +12,7 @@
             <Button fx:id="btnProduction" onAction="#loadChaineProductionView" text="Production" />
             <Button fx:id="btnAchatVente" onAction="#loadAchatVenteView" text="Achat/Vente" />
             <Label alignment="CENTER" text="Gestion Production" />
+            <Button fx:id="btnExport" onAction="#Export" text="Exporter" />
             
         </items>
     </ToolBar>

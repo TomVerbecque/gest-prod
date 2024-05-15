@@ -16,12 +16,10 @@ public class Indicateur {
             Integer availableQuantity = quantiteTotale.getOrDefault(code, 0);
 
             if (availableQuantity < neededQuantity) {
-                System.out.println("Insufficient stock for code: " + code);
+              
                 return false; // Quantité insuffisante trouvée, retourner false immédiatement
             }
-            else {
-            	System.out.println("esta bueno");
-            }
+            
         }
         return true; // Toutes les quantités nécessaires sont disponibles
     }
@@ -59,9 +57,7 @@ public class Indicateur {
 	        if (codePrixVente.containsKey(code)) {
 	            Integer prixVente = codePrixVente.get(code);
 	            totalValue += quantite * prixVente;
-	            System.out.println(prixVente);
-	            System.out.println(quantite);
-	            System.out.println(totalValue);
+	           
 	        }
 	    }
 	    return totalValue;

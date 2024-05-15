@@ -46,6 +46,11 @@
     	<artifactId>gest-prod</artifactId>
     	<version>0.0.1-SNAPSHOT</version>
     </dependency>
+    <dependency>
+    <groupId>com.itextpdf</groupId>
+    <artifactId>itextpdf</artifactId>
+    <version>5.5.13.1</version>
+</dependency>
   </dependencies>
 
   <build>
