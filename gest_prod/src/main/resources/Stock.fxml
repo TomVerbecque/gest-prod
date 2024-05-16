@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.cell.PropertyValueFactory?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
@@ -12,25 +10,22 @@
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <children>
-            <TableView fx:id="tableViewStock" editable="true" layoutX="36.0" layoutY="96.0" prefHeight="280.0" prefWidth="529.0">
+            <TableView fx:id="tableViewStock" editable="true" layoutX="-1.0" prefHeight="400.0" prefWidth="600.0">
                <columns>
-        <TableColumn prefWidth="132.25" text="Code" >
+        <TableColumn prefWidth="132.25" text="Code">
             <cellValueFactory><PropertyValueFactory property="code" /></cellValueFactory>
         </TableColumn>
         <TableColumn prefWidth="132.25" text="Nom">
             <cellValueFactory><PropertyValueFactory property="name" /></cellValueFactory>
         </TableColumn>
-        <TableColumn prefWidth="132.25" text="Quantité">
+        <TableColumn prefWidth="179.0" text="Quantité">
             <cellValueFactory><PropertyValueFactory property="quantity" /></cellValueFactory>
         </TableColumn>
-        <TableColumn prefWidth="132.25" text="Unité">
+        <TableColumn prefWidth="154.0" text="Unité">
             <cellValueFactory><PropertyValueFactory property="unit" /></cellValueFactory>
         </TableColumn>
     </columns>
             </TableView>
-            
-            <Button layoutX="540.0" layoutY="71.0" mnemonicParsing="false" text="+" />
-            <TextField layoutX="36.0" layoutY="71.0" promptText="Rechercher" />
       </children>
     </AnchorPane>
   </children>

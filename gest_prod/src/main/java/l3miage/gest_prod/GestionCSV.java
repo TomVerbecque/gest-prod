@@ -187,9 +187,10 @@ public class GestionCSV {
         String nomChaine = "";
         
         for (String part : data.split("\\|")) {
+        	
         	 for(ChaineProduction chaines : listChaine) {
           	   if(part.equals(chaines.getCode())) {
-          		   nomChaine=chaines.getName();       		  
+          		   nomChaine=nomChaine+" "+chaines.getName();       		  
           	   }       	                          
              }    
             
@@ -202,12 +203,18 @@ public class GestionCSV {
 		List<ChaineProduction> nomChaine=new ArrayList<>();
         
         for (String part : data.split("\\|")) {
+        	
            for(ChaineProduction chaines : chaine) {
+        	   System.out.println("Valeur part"+part);
+     		   System.out.println("Valeur Code Chaine"+chaines.getCode());
         	   if(part.equals(chaines.getCode())) {
-        		   nomChaine.add(chaines);       		  
+        		   
+        		   nomChaine.add(chaines);
+        		   System.out.println(nomChaine);
         	   }       	                          
            }       
         }
+        System.out.println(nomChaine.size()+"taille");
         return nomChaine;
     }
     

@@ -34,13 +34,15 @@ public class Indicateur {
 		int totalPersonne=Integer.parseInt(chaine.getPersonnel());
 		int cptPersonneDispo=0;
 		for(Personnel personne: personnel) {
+			System.out.println("id personne"+personne.getCode());
 			for(int i=0;i< personne.getChaines().size();i++) {
+			
 				if(personne.getChaines().get(i).getCode().equals(chaine.getCode())&& personne.isEstDispo()) {
 					cptPersonneDispo=cptPersonneDispo+1;
 				}
 			}
 		}
-		if (cptPersonneDispo > totalPersonne) {
+		if (cptPersonneDispo >= totalPersonne) {
 			ok=true;
 		}
 		return ok;

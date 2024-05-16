@@ -32,6 +32,7 @@ public class AccueilController {
 		Platform.runLater(() -> {
 			
 			List<ChaineProduction> chaines= new ArrayList<>();
+			List<ChaineProduction> chainesTotale= new ArrayList<>();
 			List<Element> listElements;
 			try {
 				
@@ -41,7 +42,7 @@ public class AccueilController {
 			            mapElements.put(element.getCode(), element);
 			            
 			        }
-			        
+			        chainesTotale = GestionCSV.readChaineCSV("src/main/java/l3miage/gest_prod/files/chaines.csv", mapElements);
 			        chaines = GestionCSV.readChaineActiveCSV("src/main/java/l3miage/gest_prod/files/chaines.csv", mapElements);
 			        Map<String,Integer> quantiteTotale = new HashMap<>();
 			        Map<String,Integer> quantiteChaineEntree = new HashMap<>();
@@ -65,7 +66,7 @@ public class AccueilController {
 				            
 				          
 				        }
-			        List<Personnel> personnel = GestionCSV.readPersonnelCSV("src/main/java/l3miage/gest_prod/files/personnel.csv",chaineProductionMap,chaines);
+			        List<Personnel> personnel = GestionCSV.readPersonnelCSV("src/main/java/l3miage/gest_prod/files/personnel.csv",chaineProductionMap,chainesTotale);
 			        for(ChaineProduction chaine: chaines) {
 			        	for(int i=0; i< Integer.parseInt(chaine.getActivationLevel());i++) {
 			        		totalChaine= totalChaine+1;
@@ -83,7 +84,7 @@ public class AccueilController {
 			        }
 			    
 			        
-			        double pourcentageChaineReussie= chaineReussie*100/totalChaine;
+			        
 			        double valeurAchat =Indicateur.totalAchat("src/main/java/l3miage/gest_prod/files/prix.csv");
 			        
 			        
@@ -97,7 +98,14 @@ public class AccueilController {
 			        }
 			        totalValeur=totalValeur-valeurAchat;
 			        textValeur.setText("Valeur Générée lors de cette simulation "+ totalValeur + " euros.");
-			        textProduction.setText(pourcentageChaineReussie +"% des chaines de production sont réalisables.");
+			        if (totalChaine>0) {
+			        	double pourcentageChaineReussie= chaineReussie*100/totalChaine;
+				        textProduction.setText(pourcentageChaineReussie +"% des chaines de production sont réalisables.");
+			        }
+			        else {
+			        	textProduction.setText("Aucune Chaine en Production");
+			        }
+			        
 			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
