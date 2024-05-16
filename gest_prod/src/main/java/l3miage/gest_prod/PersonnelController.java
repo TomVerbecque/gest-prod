@@ -38,9 +38,10 @@ public class PersonnelController {
 			            
 			          
 			        }
-		          List<Personnel> personnel = GestionCSV.readPersonnelCSV("src/main/java/l3miage/gest_prod/files/personnel.csv",chaineProductionMap);
+		          List<Personnel> personnel = GestionCSV.readPersonnelCSV("src/main/java/l3miage/gest_prod/files/personnel.csv",chaineProductionMap,chaines);
 				  ObservableList<Personnel> observableList = FXCollections.observableList(personnel);
 				  tableViewPersonnel.setItems(observableList);
+				 
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

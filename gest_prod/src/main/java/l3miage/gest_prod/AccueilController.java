@@ -45,6 +45,7 @@ public class AccueilController {
 			        chaines = GestionCSV.readChaineActiveCSV("src/main/java/l3miage/gest_prod/files/chaines.csv", mapElements);
 			        Map<String,Integer> quantiteTotale = new HashMap<>();
 			        Map<String,Integer> quantiteChaineEntree = new HashMap<>();
+			        
 			        List<AchatVente> listAchatVentes = GestionCSV.readPrixCSV("src/main/java/l3miage/gest_prod/files/prix.csv", mapElements);
 			        List<ChaineProduction> chaineReussies = new ArrayList<ChaineProduction>();
 			        AchatVente achatVente;
@@ -58,16 +59,25 @@ public class AccueilController {
 			        	quantiteTotale.put(achatVente.getCode(), Integer.parseInt(achatVente.getQuantite())+Integer.parseInt(element.getQuantity()));
 			      
 			        }
+			        Map<String, ChaineProduction> chaineProductionMap= new HashMap<>();	
+			          for (ChaineProduction chaine : chaines) {
+			        	  chaineProductionMap.put(chaine.getCode(), chaine);
+				            
+				          
+				        }
+			        List<Personnel> personnel = GestionCSV.readPersonnelCSV("src/main/java/l3miage/gest_prod/files/personnel.csv",chaineProductionMap,chaines);
 			        for(ChaineProduction chaine: chaines) {
 			        	for(int i=0; i< Integer.parseInt(chaine.getActivationLevel());i++) {
 			        		totalChaine= totalChaine+1;
 				        	quantiteChaineEntree=GestionCSV.parseElementQuantiteChaine(chaine.getEntreeString(),mapElements);
 				        	
-				        	if(Indicateur.QuantiteDisponible(quantiteTotale, quantiteChaineEntree)){
-				        		chaineReussie=chaineReussie+1;
-				        		chaineReussies.add(chaine);
-				        		Indicateur.EnleverQuantite(quantiteTotale,quantiteChaineEntree);
-				        		
+				        	if(Indicateur.quantiteDisponible(quantiteTotale, quantiteChaineEntree)){
+				        		if(Indicateur.verifPersonnel(personnel, chaine)) {
+					        		chaineReussie=chaineReussie+1;
+					        		chaineReussies.add(chaine);
+					        		Indicateur.EnleverQuantite(quantiteTotale,quantiteChaineEntree);
+					        		Indicateur.enleverPersonnel(personnel, chaine);
+				        		}
 				        	}
 			        	}
 			        }

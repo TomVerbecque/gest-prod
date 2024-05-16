@@ -47,17 +47,18 @@ public class GestionCSV {
         return chaines;
     }
     
-   public static List<Personnel> readPersonnelCSV(String cheminFichier, Map<String, ChaineProduction> chaineProductionMap) throws IOException {
+   public static List<Personnel> readPersonnelCSV(String cheminFichier, Map<String, ChaineProduction> chaineProductionMap, List<ChaineProduction> listChaine) throws IOException {
         List<Personnel> personnels = new ArrayList<>();
+        List<ChaineProduction>chaines= new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(cheminFichier))) {
             reader.readLine();  // Ignorer l'en-tête
             String ligne;
             while ((ligne = reader.readLine()) != null) {
                 String[] data = ligne.split(",");
                 
-                String chaine = parseChaine(data[3], chaineProductionMap);
-              
-                Personnel personnel = new Personnel(data[0], data[1],data[2],chaine);
+                String chaine = parseChaine(data[3], listChaine);
+                chaines = parseChaineString(data[3],listChaine);
+                Personnel personnel = new Personnel(data[0], data[1],data[2],chaine,chaines);
                 personnels.add(personnel);
             }
         }
@@ -182,17 +183,33 @@ public class GestionCSV {
         return elements;
     }
     
-    public static String parseChaine(String data, Map<String, ChaineProduction> chaineProductionsMap) {
+    public static String parseChaine(String data,List<ChaineProduction> listChaine) {
         String nomChaine = "";
+        
         for (String part : data.split("\\|")) {
-            String[] item = part.split(":");
-            ChaineProduction chaine = chaineProductionsMap.get(item[0]);
-            nomChaine=nomChaine+chaine.getName()+" ";
+        	 for(ChaineProduction chaines : listChaine) {
+          	   if(part.equals(chaines.getCode())) {
+          		   nomChaine=chaines.getName();       		  
+          	   }       	                          
+             }    
             
         }
         return nomChaine;
     }
     
+ 
+	public static List<ChaineProduction> parseChaineString(String data, List<ChaineProduction> chaine) {
+		List<ChaineProduction> nomChaine=new ArrayList<>();
+        
+        for (String part : data.split("\\|")) {
+           for(ChaineProduction chaines : chaine) {
+        	   if(part.equals(chaines.getCode())) {
+        		   nomChaine.add(chaines);       		  
+        	   }       	                          
+           }       
+        }
+        return nomChaine;
+    }
     
     
     public static void saveChaineCSV(List<ChaineProduction> chaines, String cheminFichier) throws IOException {
@@ -201,7 +218,7 @@ public class GestionCSV {
     	String sortie;
     	String[] infos;
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(cheminFichier))) {
-            writer.write("Code,Nom,Niveau d'Activation,Entrees,Sorties\n");
+            writer.write("Code,Nom,Niveau d'Activation,Entrees,Sorties,Personnel\n");
             for (int i = 0; i < chaines.size(); i++) {
             	infos=entreeSortie.get(i);
             	entree= infos[0];
@@ -210,7 +227,8 @@ public class GestionCSV {
                              chaines.get(i).getName() + "," +
                              chaines.get(i).getActivationLevel() + "," +
                              entree + "," +
-                             sortie + "\n");
+                             sortie + "," +
+                             chaines.get(i).getPersonnel() + "\n");
             }
         }
     }

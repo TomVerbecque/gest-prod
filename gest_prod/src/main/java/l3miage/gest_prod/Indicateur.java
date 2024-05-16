@@ -16,22 +16,52 @@ public class Indicateur {
 	 *ENTREE: Deux variables comprenant le code de l'élément et sa quantite
 	 *SORTIE: Booleen
 	*/
-	public static boolean QuantiteDisponible(Map<String, Integer> quantiteTotale, Map<String, Integer> quantiteChaineEntree) {
-		boolean ok=true;
+	public static boolean quantiteDisponible(Map<String, Integer> quantiteTotale, Map<String, Integer> quantiteChaineEntree) {
+		boolean ok=false;
         for (String code : quantiteChaineEntree.keySet()) {
             Integer neededQuantity = quantiteChaineEntree.get(code);
             Integer availableQuantity = quantiteTotale.getOrDefault(code, 0);
-
-            if (availableQuantity < neededQuantity) {
-              
-                ok=false; 
-            }
-            
-        }
+           
+            if (availableQuantity > neededQuantity) {                     
+            	  ok=true;           	              	  
+               }                
+            }                            
         return ok; 
     }
 	
+	public static boolean verifPersonnel(List<Personnel> personnel,ChaineProduction chaine) {
+		boolean ok=false;
+		int totalPersonne=Integer.parseInt(chaine.getPersonnel());
+		int cptPersonneDispo=0;
+		for(Personnel personne: personnel) {
+			for(int i=0;i< personne.getChaines().size();i++) {
+				if(personne.getChaines().get(i).getCode().equals(chaine.getCode())&& personne.isEstDispo()) {
+					cptPersonneDispo=cptPersonneDispo+1;
+				}
+			}
+		}
+		if (cptPersonneDispo > totalPersonne) {
+			ok=true;
+		}
+		return ok;
+		
+	}
 	
+	public static void enleverPersonnel(List<Personnel> personnel, ChaineProduction chaine) {
+	    int totalPersonne = Integer.parseInt(chaine.getPersonnel());
+	    int cpt = 0;
+
+	    // Parcourir la liste de personnel
+	    for (Personnel p : personnel) {
+	        if (p.isEstDispo()) {  // Vérifier si le personnel est disponible
+	            p.setEstDispo(false);  // Mettre le personnel comme non disponible
+	            cpt++;  // Incrémenter le compteur des personnels affectés
+	            if (cpt >= totalPersonne) {
+	                break;  // Sortir de la boucle si on a affecté assez de personnel
+	            }
+	        }
+	    }
+	}
 	/*
 	 *Fonction Supprimant le stock de l'entree de la chaine au stock total
 	 *Elle est appelée si QuantiteDisponible retourne Vrai
@@ -87,19 +117,7 @@ public class Indicateur {
 	    return totalValue;
 	}
 	
-	public boolean verifierDisponibilitePersonnel(String chaineId, Map<String, Integer> personnelDisponible, Map<String, Integer> besoinPersonnel) {
-	    Integer personnelNecessaire = besoinPersonnel.get(chaineId);
-	    Integer personnelDispo = personnelDisponible.getOrDefault(chaineId, 0);
-
-	    return personnelDispo >= personnelNecessaire;
-	}
-
-	public void reserverPersonnel(String chaineId, Map<String, Integer> personnelDisponible, Map<String, Integer> besoinPersonnel) {
-	   
-	        int personnelRestant = personnelDisponible.get(chaineId) - besoinPersonnel.get(chaineId);
-	        personnelDisponible.put(chaineId, personnelRestant);
-	    
-	}
+	
 
 
 	
