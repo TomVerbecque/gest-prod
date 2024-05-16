@@ -26,7 +26,7 @@ public class ChaineProductionController {
 	        GestionCSV.saveChaineCSV(tableViewChaineProduction.getItems(),"src/main/java/l3miage/gest_prod/files/chaines.csv");
 	        System.out.println("Modifications sauvegardées.");
 	    } catch (IOException e) {
-	        e.printStackTrace(); // Affiche l'erreur en cas de problème
+	        e.printStackTrace(); 
 	        System.out.println("Erreur lors de la sauvegarde des modifications.");
 	    }
 	}
@@ -56,7 +56,7 @@ public class ChaineProductionController {
 	    activationLevelColumn.setOnEditCommit(event -> {
 	        ChaineProduction chaine = event.getRowValue();
 	        chaine.setActivationLevel(event.getNewValue());
-	        saveChanges(); // Modifier cette méthode pour inclure la sauvegarde dans le fichier CSV
+	        saveChanges(); 
 	    });
 
        

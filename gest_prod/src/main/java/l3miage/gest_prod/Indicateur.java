@@ -68,13 +68,13 @@ public class Indicateur {
 	    int totalPersonne = Integer.parseInt(chaine.getPersonnel());
 	    int cpt = 0;
 
-	    // Parcourir la liste de personnel
+	   
 	    for (Personnel p : personnel) {
-	        if (p.isEstDispo()) {  // Vérifier si le personnel est disponible
-	            p.setEstDispo(false);  // Mettre le personnel comme non disponible
-	            cpt++;  // Incrémenter le compteur des personnels affectés
+	        if (p.isEstDispo()) { 
+	            p.setEstDispo(false);  
+	            cpt++;  
 	            if (cpt >= totalPersonne) {
-	                break;  // Sortir de la boucle si on a affecté assez de personnel
+	                break;  
 	            }
 	        }
 	    }

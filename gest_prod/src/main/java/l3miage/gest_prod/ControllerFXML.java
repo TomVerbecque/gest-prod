@@ -13,7 +13,7 @@ import javafx.scene.layout.VBox;
 public class ControllerFXML {
 
     @FXML
-    private HeaderController headerController; // Assurez-vous que c'est correctement annoté pour FXML
+    private HeaderController headerController; 
 
     @FXML
     private Pane mainContent;
@@ -36,7 +36,7 @@ public class ControllerFXML {
             Node view = loader.load();
             mainContent.getChildren().setAll(view);
         } catch (IOException e) {
-            e.printStackTrace();  // Imprimez la trace de la pile pour voir ce qui ne va pas
+            e.printStackTrace(); 
         }
     }
 

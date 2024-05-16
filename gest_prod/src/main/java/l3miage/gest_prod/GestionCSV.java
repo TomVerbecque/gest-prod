@@ -355,10 +355,10 @@ public class GestionCSV {
     public static String getCodeByElementName(Map<String, Element> map, String nom) {
         for (Map.Entry<String, Element> entry : map.entrySet()) {
             if (entry.getValue().getName().equals(nom)) {
-                return entry.getKey();  // Retourne le code de l'élément correspondant
+                return entry.getKey();  
             }
         }
-        return null; // Retourne null si aucun élément correspondant n'est trouvé
+        return null;
     }
     
     

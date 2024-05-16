@@ -38,7 +38,7 @@ public class ExportPDF {
         	achatVente=achatVentes.get(i);
         	element=listElements.get(i);
         	totalStock=Integer.parseInt(element.getQuantity())+Integer.parseInt(achatVente.getQuantite());
-        	document.add(new Paragraph(element.getCode()+" - "+element.getName()+" - "+ totalStock)); // Remplacez par les données réelles à exporter
+        	document.add(new Paragraph(element.getCode()+" - "+element.getName()+" - "+ totalStock)); 
         }
         
         document.add(new Paragraph("------------------------------------------"));
@@ -59,7 +59,7 @@ public class ExportPDF {
 	    
 	    document.add(new Paragraph("Personnel"));
 	    document.add(new Paragraph("Code - Nom - Prénom - Chaine(s)"));
-	    List<ChaineProduction> chaineTotale= GestionCSV.readChaineActiveCSV("src/main/java/l3miage/gest_prod/files/chaines.csv", mapElements);
+	    List<ChaineProduction> chaineTotale= GestionCSV.readChaineCSV("src/main/java/l3miage/gest_prod/files/chaines.csv", mapElements);
 	    chaines = GestionCSV.readChaineActiveCSV("src/main/java/l3miage/gest_prod/files/chaines.csv", mapElements);
 	    Map<String, ChaineProduction> chaineProductionMap= new HashMap<>();	
         for (ChaineProduction chaine : chaines) {

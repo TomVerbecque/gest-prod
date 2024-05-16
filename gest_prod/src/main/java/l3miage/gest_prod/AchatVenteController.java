@@ -16,9 +16,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 
 public class AchatVenteController {
+	
 	@FXML
 	private TableView<AchatVente> tableViewAchatVente;
-	
 	@FXML
 	private TableColumn<AchatVente, String> quantiteColumn;
 	
@@ -27,7 +27,7 @@ public class AchatVenteController {
 	        GestionCSV.savePrixCSV(tableViewAchatVente.getItems(),"src/main/java/l3miage/gest_prod/files/prix.csv",  mapElements);
 	        System.out.println("Modifications sauvegardées.");
 	    } catch (IOException e) {
-	        e.printStackTrace(); // Affiche l'erreur en cas de problème
+	        e.printStackTrace(); 
 	        System.out.println("Erreur lors de la sauvegarde des modifications.");
 	    }
 	}
@@ -48,13 +48,13 @@ public class AchatVenteController {
 			    ObservableList<AchatVente> observableList = FXCollections.observableList(achatvente);
 			    tableViewAchatVente.setItems(observableList);
 			    quantiteColumn.setCellValueFactory(new PropertyValueFactory<>("quantite"));
-			    // Assurez-vous que le TextFieldTableCell utilise un StringConverter approprié
+			  
 			    quantiteColumn.setCellFactory(TextFieldTableCell.forTableColumn());
 			    quantiteColumn.setOnEditCommit(event -> {
 			        AchatVente achatVente = event.getRowValue();
 			        if (!"NA".equals(achatVente.getAchat())) {
 			            achatVente.setQuantite(event.getNewValue());
-			            saveQuantiteChanges(mapElements); // Méthode pour enregistrer les changements
+			            saveQuantiteChanges(mapElements);
 			        }
 			    });
 	       
