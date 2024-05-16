@@ -10,12 +10,13 @@ import java.util.Map;
 
 public class Indicateur {
 	
-	
-	/*
-	 *Fonction Retournant un Booleen pour savoir si la quantite en entrée d'une chaine est disponible en stock
-	 *ENTREE: Deux variables comprenant le code de l'élément et sa quantite
-	 *SORTIE: Booleen
-	*/
+
+	/**
+	 * Fonction Retournant un Booleen pour savoir si la quantite en entrée d'une chaine est disponible en stock
+	 * @param quantiteTotale
+	 * @param quantiteChaineEntree
+	 * @return boolean ok
+	 */
 	public static boolean quantiteDisponible(Map<String, Integer> quantiteTotale, Map<String, Integer> quantiteChaineEntree) {
 		boolean ok=false;
         for (String code : quantiteChaineEntree.keySet()) {
@@ -29,12 +30,19 @@ public class Indicateur {
         return ok; 
     }
 	
+
+	/**
+	 * Fonction Retournant True si il y a assez de personnel pour réaliser la chaine
+	 * @param personnel
+	 * @param chaine
+	 * @return boolean ok
+	 */
 	public static boolean verifPersonnel(List<Personnel> personnel,ChaineProduction chaine) {
 		boolean ok=false;
 		int totalPersonne=Integer.parseInt(chaine.getPersonnel());
 		int cptPersonneDispo=0;
 		for(Personnel personne: personnel) {
-			System.out.println("id personne"+personne.getCode());
+			
 			for(int i=0;i< personne.getChaines().size();i++) {
 			
 				if(personne.getChaines().get(i).getCode().equals(chaine.getCode())&& personne.isEstDispo()) {
@@ -49,6 +57,13 @@ public class Indicateur {
 		
 	}
 	
+	
+	
+	/**
+	 * Fonction pour set estDispo False des personnels utilisés par la chaine afin d'empecher leur réutilisation
+	 * @param personnel
+	 * @param chaine
+	 */
 	public static void enleverPersonnel(List<Personnel> personnel, ChaineProduction chaine) {
 	    int totalPersonne = Integer.parseInt(chaine.getPersonnel());
 	    int cpt = 0;
@@ -64,11 +79,13 @@ public class Indicateur {
 	        }
 	    }
 	}
-	/*
-	 *Fonction Supprimant le stock de l'entree de la chaine au stock total
-	 *Elle est appelée si QuantiteDisponible retourne Vrai
-	 *ENTREE: Deux variables comprenant le code de l'élément et sa quantite
-	*/
+	
+	
+	/**
+	 * Fonction Supprimant le stock de l'entree de la chaine au stock total
+	 * @param quantiteTotale
+	 * @param quantiteChaineEntree
+	 */
 	public static void EnleverQuantite(Map<String, Integer> quantiteTotale, Map<String, Integer> quantiteChaineEntree) {
         quantiteChaineEntree.forEach((code, neededQuantity) -> {
             int availableQuantity = quantiteTotale.get(code);
@@ -77,11 +94,13 @@ public class Indicateur {
     }
 	
 	
-	/*
-	 *Fonction Retournant le total des achats effectués
-	 *ENTREE: Chemin du fichier prix.csv
-	 *SORTIE: Total acheté
-	*/
+	/**
+	 * Fonction Retournant le total des achats effectués
+	 * @param cheminFichier
+	 * @return double totalAchat 
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 */
 	public static double totalAchat (String cheminFichier) throws FileNotFoundException, IOException{
    	 double totalAchat = 0;
    	 try (BufferedReader reader = new BufferedReader(new FileReader(cheminFichier))) {
@@ -100,11 +119,13 @@ public class Indicateur {
    	 return totalAchat;
    }
 
-	/*
-	 *Fonction Retournant le total des ventes effectués
-	 *ENTREE: Deux Map, un avec Code Element et Quantite et l'autre avec Code Element et son prix
-	 *SORTIE: Total vendu
-	*/
+	
+	/**
+	 * Fonction Retournant le total des ventes effectués
+	 * @param quantiteChaineSortie
+	 * @param codePrixVente
+	 * @return  double totalValue
+	 */
 	public static double totalVenteProduction(Map<String, Integer> quantiteChaineSortie, Map<String, Integer> codePrixVente) {
 	    double totalValue = 0;
 	    for (Map.Entry<String, Integer> entry : quantiteChaineSortie.entrySet()) {

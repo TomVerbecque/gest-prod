@@ -26,76 +26,27 @@ public class ChaineProduction {
         this.entreeString = entreeString;
     }
 
-    // Getters pour JavaFX TableView
-    public String getCode() {
-        return code.get();
-    }
+    //Getters
+    public String getCode() {return code.get();}
+    public String getName() {return name.get();}
+	public String getActivationLevel() {return activationLevel.get();}
+	public String getInputElements() {return inputElements.get();}
+	public String getOutputElements() {return outputElements.get();}
+    public String getSortieString() {return sortieString;}
+	public String getEntreeString() {return entreeString;}
+	public String getPersonnel() {return personnel.get();}
 
-    public String getName() {
-        return name.get();
-    }
+    //Setters   
+    public void setCode(String code) {this.code.set(code);}
+    public void setName(String name) {this.name.set(name);}
+	public void setActivationLevel(String activationLevel) {this.activationLevel.set(activationLevel);}
+	public void setInputElements(String inputElements) {this.inputElements.set(inputElements);}
+	public void setOutputElements(String outputElements) {this.outputElements.set(outputElements);}
+	public void setSortieString(String sortieString) {this.sortieString = sortieString;}
+	public void setEntreeString(String entreeString) {this.entreeString = entreeString;}
+	public void setPersonnel(String personnel) {this.personnel.set(personnel);;}
 
-    // Pour obtenir les noms et quantités formatés des entrées
-   
 
-    // Méthode utilitaire pour formater les éléments de la Map
-    
-
-    // Setters au cas où vous en auriez besoin pour la logique de l'application
-    public void setCode(String code) {
-        this.code.set(code);
-    }
-
-    public void setName(String name) {
-        this.name.set(name);
-    }
-
-	public String getActivationLevel() {
-		return activationLevel.get();
-	}
-
-	public void setActivationLevel(String activationLevel) {
-		this.activationLevel.set(activationLevel);
-	}
-
-	public String getInputElements() {
-		return inputElements.get();
-	}
-
-	public void setInputElements(String inputElements) {
-		this.inputElements.set(inputElements);
-	}
-
-	public String getOutputElements() {
-		return outputElements.get();
-	}
-
-	public void setOutputElements(String outputElements) {
-		this.outputElements.set(outputElements);
-	}
-
-    public String getSortieString() {
-		return sortieString;
-	}
-
-	public void setSortieString(String sortieString) {
-		this.sortieString = sortieString;
-	}
-
-	public String getEntreeString() {
-		return entreeString;
-	}
-
-	public void setEntreeString(String entreeString) {
-		this.entreeString = entreeString;
-	}
-	public String getPersonnel() {
-		return personnel.get();
-	}
-
-	public void setPersonnel(String personnel) {
-		this.personnel.set(personnel);;
-	}
 
 
 }

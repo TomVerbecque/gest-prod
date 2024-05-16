@@ -11,26 +11,29 @@ import javafx.fxml.FXML;
 public class HeaderController {
     private ControllerFXML mainController;
     
-
+    //à l'initialisation on appelle le controller principal
     public void init(ControllerFXML mainController) {
         this.mainController = mainController;
     }
     
+    //Fonctions permettant de naviguer entre les vues avec les boutons de l'header
     @FXML
     public void loadAccueilView() {
         mainController.loadView("/Accueil.fxml");
     }
     
+
     @FXML
     public void loadStockView() {
         mainController.loadView("/Stock.fxml");
     }
 
+
     @FXML
     public void loadChaineProductionView() {
         mainController.loadView("/ChaineProduction.fxml");
     }
-
+    
     @FXML
     public void loadAchatVenteView() {
         mainController.loadView("/AchatVente.fxml");
@@ -41,6 +44,7 @@ public class HeaderController {
         mainController.loadView("/Personnel.fxml");
     }
     
+    //Fonction d'export de la simulation en pdf
     @FXML
     public void Export() throws DocumentException, IOException {
         ExportPDF.exportDataToPDF();

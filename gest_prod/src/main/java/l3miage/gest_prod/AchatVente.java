@@ -19,58 +19,21 @@ public class AchatVente {
         this.vente = new SimpleStringProperty(p_prixVente);
         this.quantite = new SimpleStringProperty(p_quantite);
     }
-    public String getCode() {
-		return code;
-	}
-
-
-	public void setCode(String code) {
-		this.code = code;
-	}
-
-
     
-	public String getElement() {
-		return this.element.get();
-	}
-	
+    
+    //Getters
+    public String getCode() {return code;}
+    public String getElement() {return this.element.get();}
+	public String getAchat() {return this.achat.get();}
+	public String getVente() {return this.vente.get();}
+	public String getQuantite() {return this.quantite.get();}
 
-	public void setElement(String element) {
-		this.element.set(element);
-	}
-	
-
-	public String getAchat() {
-		return this.achat.get();
-	}
-	
-
-	public void setAchat(String achat) {
-		this.achat.set(achat);
-	}
-	
-
-	
-
-	public String getVente() {
-		return this.vente.get();
-	}
-	
-
-	public void setVente(String vente) {
-		this.vente.set(vente);
-	}
-
-
-	public String getQuantite() {
-		return this.quantite.get();
-	}
-	
-
-
-	public void setQuantite(String quantite) {
-		this.quantite.set(quantite);
-	}
+    //Setters
+    public void setCode(String code){this.code = code;}	
+    public void setElement(String element) {this.element.set(element);}
+	public void setAchat(String achat) {this.achat.set(achat);}
+	public void setVente(String vente) {this.vente.set(vente);}
+	public void setQuantite(String quantite) {this.quantite.set(quantite);}
 	
 	
 }

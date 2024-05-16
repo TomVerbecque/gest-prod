@@ -15,13 +15,14 @@ public class Element {
         this.quantity = new SimpleStringProperty(quantity);
         this.unit = new SimpleStringProperty(unit);
     }
-
+    
+    //Getters
     public String getCode() { return code.get(); }
     public String getName() { return name.get(); }
     public String getQuantity() { return quantity.get(); }
     public String getUnit() { return unit.get(); }
 
-    // Plus les setters si nécessaire
+    //Setters
     public void setCode(String code) { this.code.set(code); }
     public void setName(String name) { this.name.set(name); }
     public void setQuantity(String quantity) { this.quantity.set(quantity); }

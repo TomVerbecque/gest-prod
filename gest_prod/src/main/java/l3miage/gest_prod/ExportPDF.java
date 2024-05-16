@@ -57,8 +57,9 @@ public class ExportPDF {
 	    
 	    document.add(new Paragraph("------------------------------------------"));
 	    
-	    document.add(new Paragraph("Chaine(s) Réussie(s)"));
-	    
+	    document.add(new Paragraph("Personnel"));
+	    document.add(new Paragraph("Code - Nom - Prénom - Chaine(s)"));
+	    List<ChaineProduction> chaineTotale= GestionCSV.readChaineActiveCSV("src/main/java/l3miage/gest_prod/files/chaines.csv", mapElements);
 	    chaines = GestionCSV.readChaineActiveCSV("src/main/java/l3miage/gest_prod/files/chaines.csv", mapElements);
 	    Map<String, ChaineProduction> chaineProductionMap= new HashMap<>();	
         for (ChaineProduction chaine : chaines) {
@@ -66,12 +67,17 @@ public class ExportPDF {
 	            
 	          
 	        }
-        List<Personnel> personnel = GestionCSV.readPersonnelCSV("src/main/java/l3miage/gest_prod/files/personnel.csv",chaineProductionMap,chaines);
+        
+        
+        List<Personnel> personnel = GestionCSV.readPersonnelCSV("src/main/java/l3miage/gest_prod/files/personnel.csv",chaineProductionMap,chaineTotale);
         Map<String,Integer> quantiteTotale = new HashMap<>();
         Map<String,Integer> quantiteChaineEntree = new HashMap<>();
         List<AchatVente> listAchatVentes = GestionCSV.readPrixCSV("src/main/java/l3miage/gest_prod/files/prix.csv", mapElements);
         List<ChaineProduction> chaineReussies = new ArrayList<ChaineProduction>();
         
+        for(Personnel personne:personnel) {
+        	document.add(new Paragraph(personne.getCode()+" - "+personne.getNom()+" - "+personne.getPrenom()+" - "+personne.getChaine()));
+        }
         int totalChaine = 0;
         int chaineReussie =0;
         for(int i=0; i<listAchatVentes.size();i++) {
@@ -87,19 +93,27 @@ public class ExportPDF {
 	        	quantiteChaineEntree=GestionCSV.parseElementQuantiteChaine(chaine.getEntreeString(),mapElements);
 	        	
 	        	if(Indicateur.quantiteDisponible(quantiteTotale, quantiteChaineEntree)){
-	        		chaineReussie=chaineReussie+1;
-	        		chaineReussies.add(chaine);
-	        		Indicateur.EnleverQuantite(quantiteTotale,quantiteChaineEntree);
-	        		
+	        		if(Indicateur.verifPersonnel(personnel, chaine)) {
+		        		chaineReussie=chaineReussie+1;
+		        		chaineReussies.add(chaine);
+		        		Indicateur.EnleverQuantite(quantiteTotale,quantiteChaineEntree);
+		        		Indicateur.enleverPersonnel(personnel, chaine);
+	        		}
 	        	}
         	}
         }
     
         
-        double pourcentageChaineReussie= chaineReussie*100/totalChaine;
         double valeurAchat =Indicateur.totalAchat("src/main/java/l3miage/gest_prod/files/prix.csv");
-        
-        
+	    document.add(new Paragraph("------------------------------------------"));
+	    if(totalChaine>0) {
+	    	double pourcentageChaineReussie= chaineReussie*100/totalChaine;
+	        document.add(new Paragraph("Chaine(s) Réussie(s) " + pourcentageChaineReussie + "%"));
+	    }
+	    else {
+	    	 document.add(new Paragraph("Aucune Chaine"));
+	    }
+       
         double totalValeur = 0;
         Map<String,Integer> quantiteChaineSortie = new HashMap<>();
         Map<String,Integer> codePrixVente=  new HashMap<>();

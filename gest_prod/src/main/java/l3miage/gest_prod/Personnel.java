@@ -23,32 +23,25 @@ public class Personnel {
         this.chaines=chaines;
     }
 
+	//Getters
     public String getCode() { return code.get(); }
     public String getNom() { return nom.get(); }
     public String getPrenom() { return prenom.get(); }
     public String getChaine() { return Chaine.get(); }
+    public boolean isEstDispo() {return estDispo;}
+	public List<ChaineProduction> getChaines() {return chaines;}
 
-    // Plus les setters si nécessaire
+    //Setters
     public void setCode(String code) { this.code.set(code); }
     public void setNom(String nom) { this.nom.set(nom); }
     public void setPrenom(String prenom) { this.prenom.set(prenom); }
     public void setChaine(String Chaine) { this.Chaine.set(Chaine); }
+	public void setEstDispo(boolean estDispo) {this.estDispo = estDispo;}
+	public void setChaines(List<ChaineProduction> chaines) {this.chaines = chaines;}
+
     
-    
-    public boolean isEstDispo() {
-		return estDispo;
-	}
 
-	public void setEstDispo(boolean estDispo) {
-		this.estDispo = estDispo;
-	}
 
-	public List<ChaineProduction> getChaines() {
-		return chaines;
-	}
 
-	public void setChaines(List<ChaineProduction> chaines) {
-		this.chaines = chaines;
-	}
 	
 }

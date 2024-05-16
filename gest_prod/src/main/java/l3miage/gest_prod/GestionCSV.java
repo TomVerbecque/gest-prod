@@ -15,7 +15,13 @@ import java.util.Map.Entry;
 import javafx.scene.control.TableView;
 
 public class GestionCSV {
-
+	
+	/**
+	 * Récupérer les éléments dans le fichier csv et les instancier en objet element
+	 * @param cheminFichier
+	 * @return List<Element> elements
+	 * @throws IOException
+	 */
     public static List<Element> readElementCSV(String cheminFichier) throws IOException {
         List<Element> elements = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(cheminFichier))) {
@@ -29,7 +35,14 @@ public class GestionCSV {
         }
         return elements;
     }
-
+    
+    /**
+     * Récupérer les chaines de production du fichier csv et les instancier en comparant les élements en sorties et entrees avec une map<string,element>
+     * @param cheminFichier
+     * @param elementsMap
+     * @return List<ChaineProduction> chaines
+     * @throws IOException
+     */
     public static List<ChaineProduction> readChaineCSV(String cheminFichier, Map<String, Element> elementsMap) throws IOException {
         List<ChaineProduction> chaines = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(cheminFichier))) {
@@ -47,6 +60,14 @@ public class GestionCSV {
         return chaines;
     }
     
+   /**
+    * Récupère la liste personnel du fichier csv et compare avec listChaine pour pouvoir ajouter la ou les listes à la personne
+    * @param cheminFichier
+    * @param chaineProductionMap
+    * @param listChaine
+    * @return List<Personnel> personnels
+    * @throws IOException
+    */
    public static List<Personnel> readPersonnelCSV(String cheminFichier, Map<String, ChaineProduction> chaineProductionMap, List<ChaineProduction> listChaine) throws IOException {
         List<Personnel> personnels = new ArrayList<>();
         List<ChaineProduction>chaines= new ArrayList<>();
@@ -65,7 +86,14 @@ public class GestionCSV {
         return personnels;
     }
     
-    
+   
+   /**
+    *  Récupérer les chaines de production avec un niveau d'activation supérieur à 0 du fichier csv et les instancier en comparant les élements en sorties et entrees avec une map<string,element>
+    * @param cheminFichier
+    * @param elementsMap
+    * @return List<ChaineProduction> chaines
+    * @throws IOException
+    */
     public static List<ChaineProduction> readChaineActiveCSV(String cheminFichier, Map<String, Element> elementsMap) throws IOException {
         List<ChaineProduction> chaines = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(cheminFichier))) {
@@ -84,6 +112,12 @@ public class GestionCSV {
         return chaines;
     }
     
+    /**
+     * Récupère une liste avec en indice 0 l'entree et indice 1 la sortie de la chaine de production
+     * @param cheminFichier
+     * @return List<String[]> entreeSortie
+     * @throws IOException
+     */
     public static List<String[]> readChaineEntreSortieCSV(String cheminFichier) throws IOException {
         List<String[]> entreeSortie = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(cheminFichier))) {
@@ -99,6 +133,13 @@ public class GestionCSV {
         return entreeSortie;
     }
     
+    /**
+     * récupère le prix des éléments en comparant le code grâce à la map
+     * @param cheminFichier
+     * @param elementsMap
+     * @return List<AchatVente> achatventes
+     * @throws IOException
+     */
     public static List<AchatVente> readPrixCSV(String cheminFichier, Map<String, Element> elementsMap) throws IOException {
         List<AchatVente> achatventes = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(cheminFichier))) {
@@ -115,6 +156,13 @@ public class GestionCSV {
         return achatventes;
     }
     
+    /**
+     * Récupère une liste comprenant le stock de l'objet + la quantite commandée
+     * @param cheminFichier
+     * @param elementsMap
+     * @return List<AchatVente> achatventes
+     * @throws IOException
+     */
     public static List<AchatVente> ajoutCommandeStockCSV(String cheminFichier, Map<String, Element> elementsMap) throws IOException {
         List<AchatVente> achatventes = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(cheminFichier))) {
@@ -131,6 +179,13 @@ public class GestionCSV {
         return achatventes;
     }
     
+    /**
+     * Retourne une map avec le code de l'élément et son prix
+     * @param cheminFichier
+     * @return  Map<String, Integer> codePrix
+     * @throws FileNotFoundException
+     * @throws IOException
+     */
     public static Map<String,Integer> codePrixVente (String cheminFichier) throws FileNotFoundException, IOException{
     	 Map<String, Integer> codePrix = new HashMap<>();
     	 try (BufferedReader reader = new BufferedReader(new FileReader(cheminFichier))) {
@@ -145,6 +200,11 @@ public class GestionCSV {
     	 return codePrix;
     }
     
+    /**
+     * Permet de récupérer en string le nom de l'élément et sa quantité à partir de ce qui est récupéré du fichier csv
+     * @param elements
+     * @return StringBuilder builder
+     */
     public static String formatElements(Map<Element, String> elements) {
         StringBuilder builder = new StringBuilder();
         if (elements != null) {
@@ -158,7 +218,12 @@ public class GestionCSV {
         return builder.toString();
     }
     
-    
+    /**
+     *  Permet de récupérer en string le nom de ou des élément et leur quantité en entree et/ou sortie de chaine à partir de ce qui est récupéré du fichier csv
+     * @param data
+     * @param elementsMap
+     * @return
+     */
     private static Map<Element, String> parseElementQuantite(String data, Map<String, Element> elementsMap) {
         Map<Element, String> elements = new HashMap<>();
         for (String part : data.split("\\|")) {
@@ -171,7 +236,12 @@ public class GestionCSV {
     }
     
    
-    
+    /**
+     * Permet de récupérer l'element et sa quantite pour la chaine en entree ou sortie
+     * @param data
+     * @param elementsMap
+     * @return
+     */
     public static Map<String, Integer> parseElementQuantiteChaine(String data, Map<String, Element> elementsMap) {
         Map<String, Integer> elements = new HashMap<>();
         for (String part : data.split("\\|")) {
@@ -183,6 +253,12 @@ public class GestionCSV {
         return elements;
     }
     
+    /**
+     * récuoère pour les employés en string les chaines qu'ils peuvent réaliser
+     * @param data
+     * @param listChaine
+     * @return String nomChaine
+     */
     public static String parseChaine(String data,List<ChaineProduction> listChaine) {
         String nomChaine = "";
         
@@ -199,26 +275,35 @@ public class GestionCSV {
     }
     
  
+    /**
+     * récupère pour les employés une liste de chaine dont ils peuvent s'occuper
+     * @param data
+     * @param chaine
+     * @return List<ChaineProduction> nomChaine
+     */
 	public static List<ChaineProduction> parseChaineString(String data, List<ChaineProduction> chaine) {
 		List<ChaineProduction> nomChaine=new ArrayList<>();
         
         for (String part : data.split("\\|")) {
         	
            for(ChaineProduction chaines : chaine) {
-        	   System.out.println("Valeur part"+part);
-     		   System.out.println("Valeur Code Chaine"+chaines.getCode());
+        	   
         	   if(part.equals(chaines.getCode())) {
         		   
         		   nomChaine.add(chaines);
-        		   System.out.println(nomChaine);
+        		          		   
         	   }       	                          
            }       
         }
-        System.out.println(nomChaine.size()+"taille");
         return nomChaine;
     }
     
-    
+    /**
+     * Sauvegarde les modifs faites sur les niveau de modification
+     * @param chaines
+     * @param cheminFichier
+     * @throws IOException
+     */
     public static void saveChaineCSV(List<ChaineProduction> chaines, String cheminFichier) throws IOException {
     	List<String[]> entreeSortie = readChaineEntreSortieCSV(cheminFichier);
     	String entree;
@@ -240,6 +325,13 @@ public class GestionCSV {
         }
     }
     
+    /**
+     * sauvegarde les modifs faites sur la quantite achetés
+     * @param achatVentes
+     * @param cheminFichier
+     * @param mapElements
+     * @throws IOException
+     */
     public static void savePrixCSV(List<AchatVente> achatVentes, String cheminFichier,Map<String, Element> mapElements) throws IOException {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(cheminFichier))) {
         	
@@ -254,6 +346,12 @@ public class GestionCSV {
         }
     }
     
+    /**
+     * permet de récupérer le code dans une map à partir de son nom
+     * @param map
+     * @param nom
+     * @return
+     */
     public static String getCodeByElementName(Map<String, Element> map, String nom) {
         for (Map.Entry<String, Element> entry : map.entrySet()) {
             if (entry.getValue().getName().equals(nom)) {

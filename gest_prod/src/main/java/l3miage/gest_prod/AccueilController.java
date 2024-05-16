@@ -19,13 +19,14 @@ import javafx.beans.property.StringProperty;
 
 public class AccueilController {
 	
-	
+	//instanciation des Text javafx pour les indicateurs
 	@FXML
-    private Text textValeur;
-	
+    private Text textValeur;   
     @FXML
     private Text textProduction;  
 	
+    
+    
 	@FXML
 	public void initialize() {
 		
