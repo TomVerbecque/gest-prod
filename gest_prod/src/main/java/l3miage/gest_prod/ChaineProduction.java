@@ -10,17 +10,18 @@ public class ChaineProduction {
     private SimpleStringProperty activationLevel;
     private SimpleStringProperty inputElements;
     private SimpleStringProperty outputElements;
-
+    private SimpleStringProperty personnel;
 	private String sortieString;
 	private String entreeString;
 
     // Constructeur
-    public ChaineProduction(String code, String name,String activationLevel, Map<Element, String> entrees, Map<Element, String> sorties, String entreeString, String sortieString) {
+    public ChaineProduction(String code, String name,String activationLevel, Map<Element, String> entrees, Map<Element, String> sorties, String entreeString, String sortieString, String personnel) {
         this.code = new SimpleStringProperty(code);
         this.name = new SimpleStringProperty(name);
         this.activationLevel = new SimpleStringProperty(activationLevel);
         this.inputElements = new SimpleStringProperty(GestionCSV.formatElements(entrees));
         this.outputElements = new SimpleStringProperty(GestionCSV.formatElements(sorties));
+        this.personnel =new SimpleStringProperty(personnel);
         this.sortieString= sortieString;
         this.entreeString = entreeString;
     }
@@ -88,5 +89,13 @@ public class ChaineProduction {
 	public void setEntreeString(String entreeString) {
 		this.entreeString = entreeString;
 	}
+	public String getPersonnel() {
+		return personnel.get();
+	}
+
+	public void setPersonnel(String personnel) {
+		this.personnel.set(personnel);;
+	}
+
 
 }

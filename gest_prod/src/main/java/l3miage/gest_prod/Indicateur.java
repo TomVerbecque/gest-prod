@@ -10,20 +10,33 @@ import java.util.Map;
 
 public class Indicateur {
 	
+	
+	/*
+	 *Fonction Retournant un Booleen pour savoir si la quantite en entrée d'une chaine est disponible en stock
+	 *ENTREE: Deux variables comprenant le code de l'élément et sa quantite
+	 *SORTIE: Booleen
+	*/
 	public static boolean QuantiteDisponible(Map<String, Integer> quantiteTotale, Map<String, Integer> quantiteChaineEntree) {
+		boolean ok=true;
         for (String code : quantiteChaineEntree.keySet()) {
             Integer neededQuantity = quantiteChaineEntree.get(code);
             Integer availableQuantity = quantiteTotale.getOrDefault(code, 0);
 
             if (availableQuantity < neededQuantity) {
               
-                return false; // Quantité insuffisante trouvée, retourner false immédiatement
+                ok=false; 
             }
             
         }
-        return true; // Toutes les quantités nécessaires sont disponibles
+        return ok; 
     }
 	
+	
+	/*
+	 *Fonction Supprimant le stock de l'entree de la chaine au stock total
+	 *Elle est appelée si QuantiteDisponible retourne Vrai
+	 *ENTREE: Deux variables comprenant le code de l'élément et sa quantite
+	*/
 	public static void EnleverQuantite(Map<String, Integer> quantiteTotale, Map<String, Integer> quantiteChaineEntree) {
         quantiteChaineEntree.forEach((code, neededQuantity) -> {
             int availableQuantity = quantiteTotale.get(code);
@@ -31,6 +44,12 @@ public class Indicateur {
         });
     }
 	
+	
+	/*
+	 *Fonction Retournant le total des achats effectués
+	 *ENTREE: Chemin du fichier prix.csv
+	 *SORTIE: Total acheté
+	*/
 	public static double totalAchat (String cheminFichier) throws FileNotFoundException, IOException{
    	 double totalAchat = 0;
    	 try (BufferedReader reader = new BufferedReader(new FileReader(cheminFichier))) {
@@ -49,6 +68,11 @@ public class Indicateur {
    	 return totalAchat;
    }
 
+	/*
+	 *Fonction Retournant le total des ventes effectués
+	 *ENTREE: Deux Map, un avec Code Element et Quantite et l'autre avec Code Element et son prix
+	 *SORTIE: Total vendu
+	*/
 	public static double totalVenteProduction(Map<String, Integer> quantiteChaineSortie, Map<String, Integer> codePrixVente) {
 	    double totalValue = 0;
 	    for (Map.Entry<String, Integer> entry : quantiteChaineSortie.entrySet()) {
@@ -62,11 +86,22 @@ public class Indicateur {
 	    }
 	    return totalValue;
 	}
+	
+	public boolean verifierDisponibilitePersonnel(String chaineId, Map<String, Integer> personnelDisponible, Map<String, Integer> besoinPersonnel) {
+	    Integer personnelNecessaire = besoinPersonnel.get(chaineId);
+	    Integer personnelDispo = personnelDisponible.getOrDefault(chaineId, 0);
+
+	    return personnelDispo >= personnelNecessaire;
+	}
+
+	public void reserverPersonnel(String chaineId, Map<String, Integer> personnelDisponible, Map<String, Integer> besoinPersonnel) {
+	   
+	        int personnelRestant = personnelDisponible.get(chaineId) - besoinPersonnel.get(chaineId);
+	        personnelDisponible.put(chaineId, personnelRestant);
+	    
+	}
+
 
 	
-	double calculerValeurProduction(List<ChaineProduction> chaines, Map<String, Double> prixVente) {
-	    double valeurTotale = 0;
-	    
-	    return valeurTotale;
-	}
+
 }

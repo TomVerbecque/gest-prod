@@ -35,6 +35,9 @@
 			        <TableColumn prefWidth="140.0" text="Éléments en Sortie">
 			            <cellValueFactory><PropertyValueFactory property="outputElements" /></cellValueFactory>
 			        </TableColumn>
+			        <TableColumn prefWidth="140.0" text="Personnel requis">
+			            <cellValueFactory><PropertyValueFactory property="personnel" /></cellValueFactory>
+			        </TableColumn>
 			    </columns>
 			</TableView>
 

@@ -40,14 +40,29 @@ public class GestionCSV {
                 
                 Map<Element, String> entrees = parseElementQuantite(data[3], elementsMap);
                 Map<Element, String> sorties = parseElementQuantite(data[4], elementsMap);
-                ChaineProduction chaine = new ChaineProduction(data[0], data[1],data[2], entrees, sorties,data[3],data[4]);
+                ChaineProduction chaine = new ChaineProduction(data[0], data[1],data[2], entrees, sorties,data[3],data[4],data[5]);
                 chaines.add(chaine);
             }
         }
         return chaines;
     }
     
-    
+   public static List<Personnel> readPersonnelCSV(String cheminFichier, Map<String, ChaineProduction> chaineProductionMap) throws IOException {
+        List<Personnel> personnels = new ArrayList<>();
+        try (BufferedReader reader = new BufferedReader(new FileReader(cheminFichier))) {
+            reader.readLine();  // Ignorer l'en-tête
+            String ligne;
+            while ((ligne = reader.readLine()) != null) {
+                String[] data = ligne.split(",");
+                
+                String chaine = parseChaine(data[3], chaineProductionMap);
+              
+                Personnel personnel = new Personnel(data[0], data[1],data[2],chaine);
+                personnels.add(personnel);
+            }
+        }
+        return personnels;
+    }
     
     
     public static List<ChaineProduction> readChaineActiveCSV(String cheminFichier, Map<String, Element> elementsMap) throws IOException {
@@ -60,7 +75,7 @@ public class GestionCSV {
                 if(Integer.parseInt(data[2])>0) {
 	                Map<Element, String> entrees = parseElementQuantite(data[3], elementsMap);
 	                Map<Element, String> sorties = parseElementQuantite(data[4], elementsMap);
-	                ChaineProduction chaine = new ChaineProduction(data[0], data[1],data[2], entrees, sorties,data[3],data[4]);
+	                ChaineProduction chaine = new ChaineProduction(data[0], data[1],data[2], entrees, sorties,data[3],data[4],data[5]);
 	                chaines.add(chaine);
             }
                 }
@@ -154,6 +169,8 @@ public class GestionCSV {
         return elements;
     }
     
+   
+    
     public static Map<String, Integer> parseElementQuantiteChaine(String data, Map<String, Element> elementsMap) {
         Map<String, Integer> elements = new HashMap<>();
         for (String part : data.split("\\|")) {
@@ -163,6 +180,17 @@ public class GestionCSV {
             elements.put(element.getCode(), quantite);
         }
         return elements;
+    }
+    
+    public static String parseChaine(String data, Map<String, ChaineProduction> chaineProductionsMap) {
+        String nomChaine = "";
+        for (String part : data.split("\\|")) {
+            String[] item = part.split(":");
+            ChaineProduction chaine = chaineProductionsMap.get(item[0]);
+            nomChaine=nomChaine+chaine.getName()+" ";
+            
+        }
+        return nomChaine;
     }
     
     

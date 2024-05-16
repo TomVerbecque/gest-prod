@@ -37,6 +37,11 @@ public class HeaderController {
     }
     
     @FXML
+    public void loadPersonnelView() {
+        mainController.loadView("/Personnel.fxml");
+    }
+    
+    @FXML
     public void Export() throws DocumentException, IOException {
         ExportPDF.exportDataToPDF();
     }
